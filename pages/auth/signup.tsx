@@ -1,43 +1,65 @@
 import Head from "next/head";
-import {Button, FormControl, FormLabel, HStack, Input,} from '@chakra-ui/react'
+import {Button, FormControl, FormLabel, useToast, Input,} from '@chakra-ui/react'
 import Link from "next/link";
+import {useForm, SubmitHandler} from "react-hook-form";
+import axios from "axios";
+import {Inputs} from "./index";
+import {useRouter} from "next/router";
 
 const Signin = () => {
+    const toast = useToast()
+    const route = useRouter()
+    const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        try {
+            // @ts-ignore
+            const {data} = await axios.post(process.env.HTTP_BASE_URL + "/register", data)
+            toast({
+                title: 'Account created.',
+                description: "Account created successfully",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            })
+            console.log(data)
+            await route.push("/auth")
+        } catch (e) {
+            toast({
+                title: 'Error creating account.',
+                description: "There is an error creating your account",
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            })
+
+        }
+    };
+
     return (
         <div className="bg-blue-950 h-screen">
             <Head>
-                <title>Login</title>
+                <title>Create Account</title>
             </Head>
             <main className={'p-20'}>
                 <div className="bg-white p-4 w-[300px] p-4 mx-auto my-10 rounded shadow-green-600">
                     <h1 className={"font-black text-2xl"}>Sign up for an account</h1>
-                    <p>Already have an account? <Link href={"/auth/signin"}><strong>Login</strong></Link></p>
-                    <form className="flex flex-col gap-2 w-full py-4 ">
+                    <p>Already have an account? <Link href={"/auth/"}><strong>Login</strong></Link></p>
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 w-full py-4 ">
 
-                        <HStack>
-                            <FormControl isRequired>
-                                <FormLabel>First Name</FormLabel>
-                                <Input type={"text"}/>
-                            </FormControl>
-                            <FormControl isRequired>
-                                <FormLabel>Last Name</FormLabel>
-                                <Input type={"text"}/>
-                            </FormControl>
 
-                        </HStack>
                         <FormControl isRequired>
-                            <FormLabel>Email</FormLabel>
-                            <Input type={"email"}/>
+                            <FormLabel>Username</FormLabel>
+                            <Input data-cy={"username"} {...register("username")} type={"text"}/>
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel>Password</FormLabel>
-                            <Input type={"password"}/>
+                            <Input data-cy={"password"} {...register("password")} type={"password"}/>
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel>Confirm Password</FormLabel>
-                            <Input type={"password"}/>
+                            <Input data-cy={"confirm-password"} {...register("password")} type={"password"}/>
                         </FormControl>
-                        <Button colorScheme={"blue"}>
+                        <Button data-cy={"signup"} type={"submit"} colorScheme={"blue"}>
                             Create Account
                         </Button>
                     </form>

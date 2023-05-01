@@ -6,16 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "cypress open"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "axios": "^1.4.0",
     "framer-motion": "^10.12.4",
     "next": "13.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0"
   },
   "devDependencies": {
@@ -23,6 +26,7 @@
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "^10.4.14",
+    "cypress": "^12.11.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "postcss": "^8.4.23",

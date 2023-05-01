@@ -32,20 +32,7 @@ const User = () => {
                 <div className={"p-2 py-4 flex flex-col gap-1 mt-10 "}>
                     <ReceivingMsgCard/>
                     <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
-                    <ReceivingMsgCard/>
-                    <SendingMsgCard/>
+
                 </div>
                 <div className={"fixed bottom-0 bg-blue-800 p-3 w-full flex gap-2 text-white"}>
                     <Input variant={"filled"} placeholder={"Type a message"}/>
