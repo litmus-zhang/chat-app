@@ -12,21 +12,21 @@ const Signin = () => {
     const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-            // @ts-ignore
-            const {data} = await axios.post(process.env.HTTP_BASE_URL + "/register", data)
+            const res = await axios.post("http://localhost:8080/register", data)
+            console.log(process.env.HTTP_BASE_URL)
             toast({
                 title: 'Account created.',
-                description: "Account created successfully",
+                description: res.data.message,
                 status: 'success',
                 duration: 9000,
                 isClosable: true,
             })
-            console.log(data)
-            await route.push("/auth")
+            await route.push("/auth/")
+            console.log(res)
         } catch (e) {
             toast({
                 title: 'Error creating account.',
-                description: "There is an error creating your account",
+                description: "error",
                 status: 'error',
                 duration: 9000,
                 isClosable: true,
