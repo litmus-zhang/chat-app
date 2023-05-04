@@ -3,6 +3,8 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import {Button, FormControl, FormLabel, Input, useToast} from '@chakra-ui/react'
 import Link from "next/link";
 import axios from "axios";
+import {useRouter} from "next/router";
+import (useRouter) from "next/router"
 
 export interface Inputs {
     password: string
@@ -10,12 +12,13 @@ export interface Inputs {
 }
 
 const Index = () => {
+    const route = useRouter()
     const toast = useToast()
     const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-            // @ts-ignore
-            const {data} = await axios.post(process.env.HTTP_BASE_URL + "/login", data)
+
+            const res = await axios.post( process.env.HTTP_BASE_URL+ "/login", data)
             toast({
                 title: 'Login Successful.',
                 description: "Login successful",
@@ -23,7 +26,7 @@ const Index = () => {
                 duration: 9000,
                 isClosable: true,
             })
-            console.log(data)
+            console.log(res.data)
         } catch (e) {
             toast({
                 title: 'Error logging in.',
@@ -49,11 +52,11 @@ const Index = () => {
                           className="flex flex-col gap-2 w-full py-4 ">
                         <FormControl isRequired>
                             <FormLabel>Username</FormLabel>
-                            <Input {...register("username")} type={"text"}/>
+                            <Input data-cy={"username"} {...register("username")} type={"text"}/>
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel>Password</FormLabel>
-                            <Input {...register("password")} type={"password"}/>
+                            <Input data-cy={"password"} {...register("password")} type={"password"}/>
                         </FormControl>
                         <Button type={"submit"} colorScheme={"blue"}>
                             Sign In
