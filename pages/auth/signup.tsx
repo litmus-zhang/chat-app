@@ -12,7 +12,7 @@ const Signin = () => {
     const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-            const res = await axios.post("http://localhost:8080/register", data)
+            const res = await axios.post(`${process.env.HTTP_BASE_URL}/register`, data)
             console.log(process.env.HTTP_BASE_URL)
             toast({
                 title: 'Account created.',

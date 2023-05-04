@@ -17,7 +17,7 @@ const Index = () => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
             // @ts-ignore
-            const res = await axios.post(process.env.HTTP_BASE_URL + "/login", data)
+            const res = await axios.post(`${process.env.HTTP_BASE_URL}/login"`, data)
             toast({
                 title: 'Login Successful.',
                 description: res.data.message,
