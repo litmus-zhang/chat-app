@@ -3,8 +3,7 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import {Button, FormControl, FormLabel, Input, useToast} from '@chakra-ui/react'
 import Link from "next/link";
 import axios from "axios";
-import {useRouter} from "next/router";
-import (useRouter) from "next/router"
+import { useRouter } from "next/router";
 
 export interface Inputs {
     password: string
@@ -17,16 +16,16 @@ const Index = () => {
     const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-
-            const res = await axios.post( process.env.HTTP_BASE_URL+ "/login", data)
+            // @ts-ignore
+            const res = await axios.post(process.env.HTTP_BASE_URL + "/login", data)
             toast({
                 title: 'Login Successful.',
-                description: "Login successful",
+                description: res.data.message,
                 status: 'success',
                 duration: 9000,
                 isClosable: true,
             })
-            console.log(res.data)
+            console.log(data)
         } catch (e) {
             toast({
                 title: 'Error logging in.',
@@ -52,11 +51,11 @@ const Index = () => {
                           className="flex flex-col gap-2 w-full py-4 ">
                         <FormControl isRequired>
                             <FormLabel>Username</FormLabel>
-                            <Input data-cy={"username"} {...register("username")} type={"text"}/>
+                            <Input {...register("username")} type={"text"}/>
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel>Password</FormLabel>
-                            <Input data-cy={"password"} {...register("password")} type={"password"}/>
+                            <Input {...register("password")} type={"password"}/>
                         </FormControl>
                         <Button type={"submit"} colorScheme={"blue"}>
                             Sign In

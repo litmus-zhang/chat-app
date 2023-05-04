@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
 export const apiSlice = createApi({
     reducerPath: "authAPi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080"
+        baseUrl: process.env.HTTP_BASE_URL,
     }),
     endpoints : (builder) => ({
         login : builder.mutation({

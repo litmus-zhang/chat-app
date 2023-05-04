@@ -1,4 +1,5 @@
-describe('template spec', () => {
+/// reference cypress.io
+describe('template m ', () => {
     it('should navigate between signup and login page', () => {
         cy.visit('/auth/signup')
         cy.contains("h1", "Sign up for an account")
@@ -10,7 +11,13 @@ describe('template spec', () => {
         cy.get('[data-cy="username"]').type("lukman")
         cy.get(':nth-child(2) > [data-cy="password"]').type("lukman123")
         cy.get('.chakra-button').click("center")
-        cy.url().should("eq", "/")
+        cy.url().contains("/auth")
     });
-    it("should lo")
+    it("should navigate to home page after  successful login", ()=>{
+        cy.visit("/auth/")
+        cy.get('[data-cy="username"]').type("lukman")
+        cy.get('[data-cy="password"]').type("lukman123")
+        cy.get('.chakra-button').click("center")
+        cy.url().should("equal", "http://localhost:3000/")
+    })
 })
