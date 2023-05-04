@@ -6,6 +6,7 @@ describe('template m ', () => {
         cy.contains("strong", "Login").click()
         cy.url().should("include", "/auth/")
     })
+    
     it('should navigate to home page after login screen', () => {
         cy.visit("/auth/")
         cy.get('[data-cy="username"]').type("lukman")
