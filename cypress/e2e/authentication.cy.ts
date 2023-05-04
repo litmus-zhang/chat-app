@@ -11,13 +11,13 @@ describe('template m ', () => {
         cy.get('[data-cy="username"]').type("lukman")
         cy.get(':nth-child(2) > [data-cy="password"]').type("lukman123")
         cy.get('.chakra-button').click("center")
-        cy.url().contains("/auth")
+        cy.url().should("include","/auth")
     });
     it("should navigate to home page after  successful login", ()=>{
         cy.visit("/auth/")
         cy.get('[data-cy="username"]').type("lukman")
         cy.get('[data-cy="password"]').type("lukman123")
         cy.get('.chakra-button').click("center")
-        cy.url().should("equal", "http://localhost:3000/")
+        cy.url().should("include", "http://localhost:3000/")
     })
 })

@@ -37,6 +37,7 @@ const Index = () => {
 
         }
     };
+    console.log(process.env.HTTP_BASE_URL)
 
     return (
         <div className="bg-blue-950 h-screen">
@@ -51,11 +52,11 @@ const Index = () => {
                           className="flex flex-col gap-2 w-full py-4 ">
                         <FormControl isRequired>
                             <FormLabel>Username</FormLabel>
-                            <Input {...register("username")} type={"text"}/>
+                            <Input data-cy={"username"} {...register("username")} type={"text"}/>
                         </FormControl>
                         <FormControl isRequired>
                             <FormLabel>Password</FormLabel>
-                            <Input {...register("password")} type={"password"}/>
+                            <Input data-cy={"password"} {...register("password")} type={"password"}/>
                         </FormControl>
                         <Button type={"submit"} colorScheme={"blue"}>
                             Sign In
